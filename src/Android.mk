@@ -26,6 +26,13 @@ LOCAL_CFLAGS += \
 	-DHAVE_CONFIG_H \
 	-lncurses
 
+# Engle, port from CM-10.1, kernel still not OK for SElinux
+ifeq ($(HAVE_SELINUX),true)
+LOCAL_STATIC_LIBRARIES += libselinux
+LOCAL_C_INCLUDES += external/libselinux/include
+LOCAL_CFLAGS += -DHAVE_SELINUX
+endif
+
 LOCAL_MODULE := vim
 LOCAL_MODULE_TAGS := eng
 LOCAL_MODULE_PATH := $(TARGET_OUT_OPTIONAL_EXECUTABLES)
